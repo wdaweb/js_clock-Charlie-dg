@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&family=Shadows+Into+Light&family=Water+Brush&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+    <style>
+        body {
+            background-image: url(./images/purple.webp);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+
+        }
+
+        /* #background {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-image: url("./starlight1.png");
+            animation: background_spin 20s linear infinite;
+        } */
+
+        @keyframes background_spin {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        #clock {
+            width: 250px;
+            height: 250px;
+            /* background: rgb(165, 129, 226); */
+            border: 5px solid rgb(229, 210, 249);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            filter:
+                drop-shadow(0 0 5px rgb(229, 210, 249)) drop-shadow(0 0 20px rgb(165, 129, 226));
+            z-index: -1;
+        }
+
+        #clock::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: rgb(229, 210, 249);
+            border: 2px solid white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter:
+                drop-shadow(0 0 2px rgb(231, 230, 232)) drop-shadow(0 0 20px rgb(231, 230, 232));
+            z-index: 1;
+        }
+
+        #clock:hover {
+            animation: outlight_clock 5s infinite;
+        }
+
+        @keyframes outlight_clock {
+            0% {
+                box-shadow:
+                    0 0 5px rgba(229, 210, 249, 0.5),
+                    0 0 10px rgba(229, 210, 249, 0.3),
+                    0 0 20px rgba(229, 210, 249, 0.1);
+            }
+
+            50% {
+                box-shadow:
+                    /* 0 0 10px rgba(229, 210, 249, 0.8), */
+                    0 0 20px rgba(229, 210, 249, 0.5),
+                    0 0 40px rgba(229, 210, 249, 0.3),
+                    0 0 100px rgba(229, 210, 249, 0.1);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 5px rgba(229, 210, 249, 0.5),
+                    0 0 10px rgba(229, 210, 249, 0.3),
+                    0 0 20px rgba(229, 210, 249, 0.1);
+            }
+        }
+
+        #hour {
+            width: 16%;
+            height: 5px;
+            background-image: url("./images/hour.png");
+            position: absolute;
+            top: calc(50% - 2.55px);
+            left: calc(50%);
+            transform-origin: left center;
+            z-index: 0;
+        }
+
+        #minute {
+            width: 32%;
+            height: 5px;
+            background-image: url("./images/minute.png");
+            position: absolute;
+            top: calc(50% - 2.55px);
+            left: calc(50%);
+            transform-origin: left center;
+            z-index: 0;
+        }
+
+        #second {
+            width: 36%;
+            height: 5px;
+            background-image: url("./images/second.png");
+            position: absolute;
+            top: calc(50% - 2.55px);
+            left: calc(50%);
+            transform-origin: left center;
+            z-index: 0;
+        }
+
+        #clock_num {
+            font-size: 18px;
+            font-family: 'Water Brush', cursive;
+        }
+
+        #num12 {
+            position: absolute;
+            top: 8%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #num3 {
+            position: absolute;
+            top: 50%;
+            left: 92%;
+            transform: translate(-50%, -50%);
+        }
+
+        #num6 {
+            position: absolute;
+            top: 92%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #num9 {
+            position: absolute;
+            top: 50%;
+            left: 8%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    </div>
+    <div id="clock">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+        <div id="clock_num">
+            <span id="num12">12</span>
+            <span id="num3">3</span>
+            <span id="num6">6</span>
+            <span id="num9">9</span>
+        </div>
+        <div id="scale_star"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script>
+            const elHour = document.getElementById('hour')
+            const elMinute = document.getElementById('minute')
+            const elSecond = document.getElementById('second')
+
+
+            setInterval(() => {
+                const date = new Date()
+                elHour.style.transform = `rotate(${date.getHours() * 30 - 90}deg)`
+                elMinute.style.transform = `rotate(${date.getMinutes() * 6 - 90}deg)`
+                elSecond.style.transform = `rotate(${date.getSeconds() * 6 - 90}deg)`
+            }, 1000)
+
+            let degree = 0, top1 = 0, left1 = 0
+            for (let i = 1; i <= 12; i++) {
+                if (i % 3 === 0) {
+                    degree += 30
+                } else {
+                    degree += 30
+                    const top1 = 105 * Math.sin(2*Math.PI / 360 * degree)
+                    const left1 = 105 * Math.cos(2*Math.PI / 360 * degree)
+                    // console.log(i, degree, top1, left1)
+                    const star = 
+                    $(`<img id="star${i}" src="./images/star1.png" 
+                    style="
+                    position: absolute;
+                    top: calc(50% + ${top1}px);
+                    left: calc(50% + ${left1}px);
+                    transform: translate(-50%, -50%);
+                    transform: rotate(${degree}deg);
+                    z-index: 3;
+                    ">`)
+                    $('#scale_star').append(star)
+                }
+            }
+
+        </script>
+</body>
+
+</html>
